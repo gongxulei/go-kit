@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pkg.mq;
+
+
+option go_package = "pkg/mq";
+option java_multiple_files = true;
+option java_outer_classname = "PkgMqProtocol";
+option java_package = "pkg.mq.protocol";
+
+// Protocol 协议
+enum Protocol {
+  // PROTOCOL_INVALID invalid protocol
+  PROTOCOL_INVALID = 0;
+  // PROTOCOL_PROTOBUF protobuf protocol
+  PROTOCOL_PROTOBUF = 1;
+  // PROTOCOL_JSON json protocol
+  PROTOCOL_JSON = 2;
+  // PROTOCOL_STRING body as string and not use protocol to serialize
+  PROTOCOL_STRING = 3;
+}

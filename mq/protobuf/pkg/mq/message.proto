@@ -1,0 +1,17 @@
+syntax = "proto3";
+package pkg.mq;
+
+import "pkg/mq/message_header.proto";
+
+option go_package = "pkg/mq";
+option java_multiple_files = true;
+option java_outer_classname = "PkgMqMessage";
+option java_package = "pkg.mq.message";
+
+// MqMessage mq消息
+message Message {
+  // header mq消息头
+  pkg.mq.MessageHeader header = 1;
+  // body 消息体
+  string body = 2;
+}
