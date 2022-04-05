@@ -5,7 +5,6 @@
 * hash
 * 一致性hash Consistency hash
 
-
 ### 快速开始
 
 ```go
