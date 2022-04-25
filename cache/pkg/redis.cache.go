@@ -9,11 +9,12 @@ import (
 /*redis缓存*/
 
 const (
-	//front_category:%s:*
+	// front_category:%s:*
 	FrontCategoryPrefixPattern = "%s*"
 	ScanKeyCount               = 1000
 	ExpiredTime                = time.Minute * 30
 	DistributedLockTime        = time.Second * 15
+	DistributedLockTryTime     = time.Second * 5
 )
 
 /*
@@ -64,8 +65,16 @@ TryGetDistributedLock 添加分布式锁
 @param requestId string 加锁key存储的唯一标识
 */
 func TryGetDistributedLock(ctx context.Context, lockKey string, requestId string) bool {
+	// 获取时间
+	now := time.Now()
+	start := now.UnixNano()
 	ok, err := Redis.SetNX(ctx, lockKey, requestId, DistributedLockTime).Result()
 	if err != nil {
+		return false
+	}
+	end := now.UnixNano()
+	if time.Duration(end-start) >= DistributedLockTryTime {
+		// 加锁返回如果超过指定时间就认为加锁失败
 		return false
 	}
 	return ok
