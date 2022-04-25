@@ -66,14 +66,13 @@ TryGetDistributedLock 添加分布式锁
 */
 func TryGetDistributedLock(ctx context.Context, lockKey string, requestId string) bool {
 	// 获取时间
-	now := time.Now()
-	start := now.UnixNano()
+	start := time.Now().UnixNano()
 	ok, err := Redis.SetNX(ctx, lockKey, requestId, DistributedLockTime).Result()
 	if err != nil {
 		return false
 	}
-	end := now.UnixNano()
-	if time.Duration(end-start) >= DistributedLockTryTime {
+	end := time.Now().UnixNano()
+	if time.Duration(end-start) > DistributedLockTryTime {
 		// 加锁返回如果超过指定时间就认为加锁失败
 		return false
 	}
