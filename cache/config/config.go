@@ -19,7 +19,7 @@ import (
 type Driver string
 
 const (
-	Redis   = "redis"
+	Redis   = "redis--"
 	GoCache = "go-cache"
 )
 
