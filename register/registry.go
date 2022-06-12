@@ -14,7 +14,6 @@ package register
 
 import (
 	"context"
-	"github.com/gongxulei/go_kit/register/plugins"
 )
 
 // Registry 服务注册插件的接口
@@ -22,7 +21,7 @@ type Registry interface {
 	// PluginName 插件的名称
 	PluginName() string
 	// NewClient 初始化客户端
-	NewClient(ctx context.Context, opts ...plugins.OptionFun) (err error)
+	NewClient(ctx context.Context, opts ...OptionFun) (err error)
 	// Register 服务注册
 	Register(ctx context.Context, service *Service) (err error)
 	// Deregister 服务注销

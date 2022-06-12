@@ -68,7 +68,7 @@ func TestPluginManager_InitRegistry(t *testing.T) {
 
 	// 实例化consul client
 	client := Default()
-	err = client.NewClient(ctx, WithOptionAddress([]string{"127.0.0.1:8500"}), WithOptionTimeout(time.Second*5))
+	err = client.NewClient(ctx, register.WithOptionAddress([]string{"127.0.0.1:8500"}), register.WithOptionTimeout(time.Second*5))
 	if err != nil {
 		t.Errorf("NewClient failed! %#v", err)
 		t.Fail()

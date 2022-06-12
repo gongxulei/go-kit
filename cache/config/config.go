@@ -19,8 +19,8 @@ import (
 type Driver string
 
 const (
-	Redis   = "redis"
-	GoCache = "go-cache"
+	Redis   Driver = "redis"
+	GoCache Driver = "go-cache"
 )
 
 type ConfigOption func(c *Config)

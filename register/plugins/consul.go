@@ -26,7 +26,7 @@ const (
 )
 
 type ConsulRegistry struct {
-	options   *Options
+	options   *register.Options
 	client    *consulApi.Client
 	serviceCh chan *register.Service
 	lockMutex sync.Mutex
@@ -45,8 +45,8 @@ func Default() *ConsulRegistry {
 	return &ConsulRegistry{}
 }
 
-func (consul *ConsulRegistry) NewClient(_ context.Context, opts ...OptionFun) (err error) {
-	consul.options = &Options{}
+func (consul *ConsulRegistry) NewClient(_ context.Context, opts ...register.OptionFun) (err error) {
+	consul.options = &register.Options{}
 	for _, opt := range opts {
 		opt(consul.options)
 	}
